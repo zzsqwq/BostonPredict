@@ -1,3 +1,9 @@
-# project files
+# Project Files
 
 *.idea
+
+# Typora cache
+
+*.assets
+
+
