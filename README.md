@@ -1,6 +1,10 @@
 ### BostonPredict
 
-​	此仓库用来对波士顿问题进行预测，使用sklearn中的公开数据集，不过在data里面也附录了一份数据集，基于pytorch实现最终的模型。最终效果如下：
+​	此仓库用来对波士顿问题进行预测，使用sklearn中的公开数据集，不过在data里面也附录了一份数据集，基于pytorch实现最终的模型。
+
+​	对应博客地址为：[利用神经网络进行波士顿房价预测 - Zs's blog](https://www.zzsqwq.cn/index.php/archives/182/)
+
+​	最终效果如下：
 
 ![](images/predict_groundtruth.png)
 
