@@ -6,8 +6,9 @@ import argparse
 
 import matplotlib.pyplot as plt
 import numpy as np
+import pandas as pd
 import torch
-from sklearn.datasets import load_boston
+# from sklearn.datasets import load_boston
 from sklearn.metrics import r2_score
 from sklearn.model_selection import train_test_split
 from sklearn.preprocessing import MinMaxScaler
@@ -22,15 +23,22 @@ def performance_metric(y_true, y_predict):
 
     return score
 
+def load_boston():
+    data_url = "http://lib.stat.cmu.edu/datasets/boston"
+    raw_df = pd.read_csv(data_url, sep="\s+", skiprows=22, header=None)
+    data = np.hstack([raw_df.values[::2, :], raw_df.values[1::2, :2]])
+    target = raw_df.values[1::2, 2]
+    return (data, target)
 
 class boston:
     def load_data(self, choose_col=[]):
-        data = load_boston()
+        data, target = load_boston()
+        print("choose_col", choose_col)
 
-        boston_x = data.data  # x
-        if len(choose_col) != 0:
+        boston_x = data # x
+        if choose_col is not None and len(choose_col) != 0:
             boston_x = boston_x[:, choose_col]  # 提取 RM PTRATIO LSTAT 列
-        boston_y = data.target  # y
+        boston_y = target  # y
         boston_y = boston_y.reshape(-1, 1)
 
         return boston_x, boston_y
@@ -137,7 +145,7 @@ if __name__ == "__main__":
 
     opt = parser.parse_args()
 
-    if len(opt.load_cols) != 0:
+    if opt.load_cols is not None and len(opt.load_cols) != 0:
         input_shape = len(opt.load_cols)
     else:
         input_shape = opt.input_shape
